@@ -1,0 +1,50 @@
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.mobileprovision
+service-account*.json
+
+# Python
+.venv/
+venv/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+node_modules/
+.expo/
+dist/
+*.db
+*.sqlite3
+
+# Node / Expo / React Native
+npm-debug.log*
+yarn-error.log*
+.metro-health-check*
+web-build/
+ios/
+android/
+coverage/
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.windsurf/
+*.swp

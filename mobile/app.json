@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "Airpal",
+    "slug": "airpal",
+    "version": "0.1.0",
+    "scheme": "airpal",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "app.airpal.mobile",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Airpal uses the camera to scan your boarding pass barcode.",
+        "NSLocationWhenInUseUsageDescription": "Airpal uses your location to pre-fill your ride pickup point.",
+        "LSApplicationQueriesSchemes": [
+          "uber"
+        ]
+      }
+    },
+    "android": {
+      "package": "app.airpal.mobile",
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ],
+      "queries": [
+        {
+          "package": "com.ubercab"
+        }
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Airpal uses the camera to scan your boarding pass barcode."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Airpal uses your location to pre-fill your ride pickup point."
+        }
+      ],
+      "expo-notifications",
+      "expo-asset",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_WITH_EAS_PROJECT_ID"
+      }
+    }
+  }
+}

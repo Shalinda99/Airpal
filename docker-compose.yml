@@ -1,0 +1,36 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: airpal
+      POSTGRES_PASSWORD: airpal
+      POSTGRES_DB: airpal
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airpal"]
+      interval: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  api:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://airpal:airpal@db:5432/airpal
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_started }
+    ports: ["8000:8000"]
+  worker:
+    build: ./backend
+    command: celery -A app.workers.celery_app worker -B -l info
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://airpal:airpal@db:5432/airpal
+      REDIS_URL: redis://redis:6379/0
+    depends_on: [api]
+volumes:
+  pgdata:
